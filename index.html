@@ -27,8 +27,10 @@
   /* TICKER */
   .ticker-wrap{background:var(--ink);color:#fff;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:0.04em;overflow:hidden;white-space:nowrap;padding:7px 0;border-bottom:1px solid #333}
   .ticker-inner{display:inline-block;animation:ticker 28s linear infinite}
-  .ticker-inner span{padding:0 2.5rem;opacity:.85}
+  .ticker-inner span{padding:0 1.25rem;opacity:.9;font-weight:600}
   .ticker-inner span.hot{color:#ff6b6b;opacity:1}
+  .ticker-inner span.up{color:#76d68a;opacity:1}
+  .ticker-inner span.down{color:#ff6b6b;opacity:1}
   @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
   /* NAV */
@@ -152,25 +154,10 @@
 </head>
 <body>
 
-<!-- TICKER -->
+<!-- LIVE MARKET TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker-inner">
-    <span class="hot">🔴 BREAKING: VC says "we love the space" — founder has 90 days of runway left</span>
-    <span>VALUATION CAP ↑ 12% after deck got a new font</span>
-    <span>TERM SHEET RECEIVED: founder cries in bathroom</span>
-    <span>PIVOT #4 complete — investors "excited about the new direction"</span>
-    <span class="hot">🔴 DILUTION ALERT: Series A closed, founder now owns 14%</span>
-    <span>COLD EMAIL to tier-1 VC: "we're not writing checks right now"</span>
-    <span>RUNWAY EXTENDED: founder stopped paying themselves</span>
-    <span>UPDATE MEETING: 47 slides, 0 decisions made</span>
-    <span class="hot">🔴 BREAKING: VC says "we love the space" — founder has 90 days of runway left</span>
-    <span>VALUATION CAP ↑ 12% after deck got a new font</span>
-    <span>TERM SHEET RECEIVED: founder cries in bathroom</span>
-    <span>PIVOT #4 complete — investors "excited about the new direction"</span>
-    <span class="hot">🔴 DILUTION ALERT: Series A closed, founder now owns 14%</span>
-    <span>COLD EMAIL to tier-1 VC: "we're not writing checks right now"</span>
-    <span>RUNWAY EXTENDED: founder stopped paying themselves</span>
-    <span>UPDATE MEETING: 47 slides, 0 decisions made</span>
+  <div class="ticker-inner" id="liveTicker">
+    <span>Loading markets...</span>
   </div>
 </div>
 
@@ -346,6 +333,72 @@
   </div>
   <span class="footer-copy">© 2026 Founder Mayhem. All chaos reserved.</span>
 </footer>
+
+
+<script>
+const FINNHUB_API_KEY = "d8k53p9r01qjgd6rgppgd8k53p9r01qjgd6rgpq0";
+
+const tickerSymbols = [
+  "NVDA",
+  "TSLA",
+  "PLTR",
+  "META",
+  "AMZN",
+  "AAPL",
+  "GS",
+  "JPM",
+  "KO",
+  "LULU"
+];
+
+async function fetchQuote(symbol) {
+  const response = await fetch(
+    `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_API_KEY}`
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${symbol}`);
+  }
+
+  return response.json();
+}
+
+async function updateLiveTicker() {
+  const ticker = document.getElementById("liveTicker");
+
+  if (!ticker) return;
+
+  if (!FINNHUB_API_KEY || FINNHUB_API_KEY === "d8k53p9r01qjgd6rgppgd8k53p9r01qjgd6rgpq0") {
+    ticker.innerHTML = "<span>Add your Finnhub API key to activate the live ticker</span>";
+    return;
+  }
+
+  try {
+    const items = await Promise.all(
+      tickerSymbols.map(async (symbol) => {
+        const data = await fetchQuote(symbol);
+        const change = Number(data.dp || 0);
+        const direction = change >= 0 ? "↑" : "↓";
+        const className = change >= 0 ? "up" : "down";
+
+        return `
+          <span class="${className}">
+            ${symbol} ${direction} ${Math.abs(change).toFixed(2)}%
+          </span>
+        `;
+      })
+    );
+
+    ticker.innerHTML = items.join("") + items.join("") + items.join("");
+  } catch (error) {
+    console.error("Ticker error:", error);
+    ticker.innerHTML = "<span>Markets temporarily unavailable</span>";
+  }
+}
+
+updateLiveTicker();
+setInterval(updateLiveTicker, 60000);
+</script>
 
 </body>
 </html>
