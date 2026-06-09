@@ -65,7 +65,7 @@
 
   /* ARTICLE GRID */
   .articles{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1.5px solid var(--ink)}
-  .article-card{padding:1.5rem 1.25rem;border-right:1px solid var(--rule);cursor:pointer}
+  .article-card{padding:1.5rem 1.25rem;border-right:1px solid var(--rule);cursor:pointer;display:block}
   .article-card:last-child{border-right:none}
   .article-card:hover .article-title{color:var(--accent)}
   .article-tag{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
@@ -180,8 +180,8 @@
   <div class="nav-links">
     <a href="#">Stories</a>
     <a href="#">VC Dictionary</a>
-    <a href="#">Fundraising</a>
-    <a href="#">Merch</a>
+    
+    <a href="#">Shop</a>
   </div>
   <div class="nav-right">
     <button class="btn-sub">Subscribe</button>
@@ -224,51 +224,51 @@
   <a href="#">Browse all →</a>
 </div>
 <div class="articles">
-  <div class="article-card">
+  <a class="article-card" href="articles/vc-aligned-on-vision.html">
     <div class="article-tag">Fundraising</div>
     <div class="article-title">"We're Aligned on Vision" Is VC for "We Will Ghost You in 30 Days"</div>
     <div class="article-meta">Jun 8 · 6 min read</div>
-  </div>
-  <div class="article-card">
+  </a>
+  <a class="article-card" href="articles/cap-table-guide.html">
     <div class="article-tag">Dilution</div>
     <div class="article-title">A Founder's Guide to Reading a Cap Table Without Crying</div>
     <div class="article-meta">Jun 5 · 9 min read</div>
-  </div>
-  <div class="article-card">
+  </a>
+  <a class="article-card" href="articles/data-room-never-read.html">
     <div class="article-tag">Due Diligence</div>
     <div class="article-title">They Asked for the Data Room Three Times. They Never Read It.</div>
     <div class="article-meta">Jun 1 · 5 min read</div>
-  </div>
-  <div class="article-card">
+  </a>
+  <a class="article-card" href="articles/11-slide-deck.html">
     <div class="article-tag">Pitch Mechanics</div>
     <div class="article-title">The 11-Slide Deck That Got a $4M Check (Annotated)</div>
     <div class="article-meta">May 28 · 12 min read</div>
-  </div>
+  </a>
 </div>
 
 <!-- FEATURED -->
 <div class="featured">
   <div class="featured-main">
     <div class="article-tag">Deep Dive</div>
-    <div class="article-title">The Soft Pass: How VCs Reject You Without Actually Saying No</div>
+    <div class="article-title"><a href="articles/soft-pass.html" style="color:inherit;">The Soft Pass: How VCs Reject You Without Actually Saying No</a></div>
     <p class="article-excerpt">Every founder has a collection of them. "Let's stay in touch." "Come back when you have more traction." "We'd love to see the next round." These phrases live in a grey zone between hope and rejection, and VCs deploy them with surgical precision. We decoded the entire vocabulary — with real examples.</p>
-    <a href="#" style="font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);">Read the full breakdown →</a>
+    <a href="articles/soft-pass.html" style="font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);">Read the full breakdown →</a>
   </div>
   <div class="featured-sidebar">
     <div class="section-label" style="padding:0 0 0.6rem;margin-bottom:0.5rem;border-bottom:1px solid var(--rule);">Trending</div>
     <div class="sidebar-item">
       <div class="article-tag">SAFEs & Notes</div>
-      <div class="sidebar-title">Why Your SAFE Might Be Worth Less Than You Think</div>
+      <a href="articles/safe-worth-less.html" class="sidebar-title">Why Your SAFE Might Be Worth Less Than You Think</a>
       <div class="article-meta">May 22 · 7 min</div>
     </div>
     <div class="sidebar-item">
       <div class="article-tag">Cold Outreach</div>
-      <div class="sidebar-title">I Sent 200 Cold Emails to VCs. Here's What Actually Worked.</div>
+      <a href="articles/200-cold-emails.html" class="sidebar-title">I Sent 200 Cold Emails to VCs. Here's What Actually Worked.</a>
       <div class="article-meta">May 18 · 10 min</div>
     </div>
     <div class="sidebar-item">
       <div class="article-tag">Emerging Markets</div>
-      <div class="sidebar-title">Raising From Gulf Investors: The Unwritten Rules Nobody Tells You</div>
+      <a href="articles/raising-gulf-investors.html" class="sidebar-title">Raising From Gulf Investors: The Unwritten Rules Nobody Tells You</a>
       <div class="article-meta">May 12 · 8 min</div>
     </div>
   </div>
@@ -332,9 +332,9 @@
   <div class="footer-links">
     <a href="#">Stories</a>
     <a href="#">VC Dictionary</a>
-    <a href="#">Fundraising</a>
+    
     <a href="#">About</a>
-    <a href="#">Merch</a>
+    <a href="#">Shop</a>
   </div>
   <div class="footer-social">
     <a href="https://instagram.com/foundermayhem" aria-label="Instagram @foundermayhem">
