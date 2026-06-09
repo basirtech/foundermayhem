@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A Founder's Guide to Reading a Cap Table Without Crying — Founder Mayhem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0f0f0f;--ink-mid:#3a3a3a;--ink-light:#888;--rule:#d8d4cc;--bg:#faf9f6;--bg-warm:#f2efe8;--accent:#c0392b;--serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,sans-serif;}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+nav{background:var(--bg);border-bottom:1.5px solid var(--ink);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:var(--serif);font-size:22px;font-weight:900;letter-spacing:-0.02em;color:var(--ink)}.nav-brand span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
+.nav-links a{color:var(--ink-mid);transition:color .15s}.nav-links a:hover{color:var(--ink)}
+.btn-sub{background:var(--ink);color:#fff;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;padding:8px 18px;cursor:pointer}
+.article-wrap{max-width:720px;margin:0 auto;padding:3rem 2rem 5rem}
+.article-tag{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.article-headline{font-family:var(--serif);font-size:clamp(28px,5vw,46px);font-weight:900;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem}
+.article-headline em{font-style:italic;color:var(--accent)}
+.article-meta{font-size:12px;color:var(--ink-light);letter-spacing:0.04em;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1.5px solid var(--ink)}
+.article-body p{font-size:17px;line-height:1.75;color:var(--ink-mid);margin-bottom:1.5rem}
+.article-body h2{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink);margin:2.5rem 0 1rem;border-top:1px solid var(--rule);padding-top:1.5rem}
+.article-body blockquote{border-left:3px solid var(--accent);padding:1rem 1.5rem;margin:2rem 0;background:var(--bg-warm)}
+.article-body blockquote p{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink);font-style:italic;margin:0}
+.article-body ul{padding-left:1.25rem;margin-bottom:1.5rem}
+.article-body ul li{font-size:17px;line-height:1.75;color:var(--ink-mid);margin-bottom:0.5rem}
+.article-body strong{color:var(--ink);font-weight:600}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+.cap-table{width:100%;border-collapse:collapse;margin:2rem 0;font-size:14px}
+.cap-table th{background:var(--ink);color:#fff;padding:10px 14px;text-align:left;font-weight:600;letter-spacing:0.06em;font-size:11px;text-transform:uppercase}
+.cap-table td{padding:10px 14px;border-bottom:1px solid var(--rule);color:var(--ink-mid)}
+.cap-table tr:last-child td{border-bottom:none;font-weight:600;color:var(--ink)}
+footer{padding:2rem;border-top:1.5px solid var(--ink);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink-light)}
+.footer-brand{font-family:var(--serif);font-size:16px;font-weight:900;color:var(--ink)}.footer-brand span{color:var(--accent)}
+@media(max-width:768px){.article-wrap{padding:2rem 1.25rem 4rem}.nav-links{display:none}nav{padding:0 1rem}}
+</style></head><body>
+<nav>
+  <a class="nav-brand" href="../index.html">Founder<span>Mayhem</span></a>
+  <div class="nav-links"><a href="../index.html">Stories</a><a href="#">VC Dictionary</a></div>
+  <div><button class="btn-sub">Subscribe</button></div>
+</nav>
+<div class="article-wrap">
+  <a class="back-link" href="../index.html">← Back to stories</a>
+  <div class="article-tag">Dilution</div>
+  <h1 class="article-headline">A Founder's Guide to Reading a Cap Table <em>Without Crying</em></h1>
+  <div class="article-meta">Jun 5, 2026 · 9 min read</div>
+  <div class="article-body">
+    <p>The cap table is the document that tells you, with cold precision, how much of your company you actually own. Most founders avoid looking at it too closely, the same way you avoid checking your bank balance in December. That is a mistake.</p>
+    <p>Understanding your cap table is not optional. Every funding round, every option grant, every convertible note you sign reshapes it. By the time you hit Series B, a founder who hasn't been paying attention often discovers they own something between 12% and 20% of what they built. Sometimes less.</p>
+
+    <h2>The basic structure</h2>
+    <p>A cap table lists every stakeholder in your company and what they own. At its simplest, it has four columns: stakeholder name, share class, number of shares, and ownership percentage. The complexity grows with every round.</p>
+    <table class="cap-table">
+      <thead><tr><th>Stakeholder</th><th>Share Class</th><th>Shares</th><th>Ownership %</th></tr></thead>
+      <tbody>
+        <tr><td>Founder A</td><td>Common</td><td>4,000,000</td><td>40%</td></tr>
+        <tr><td>Founder B</td><td>Common</td><td>4,000,000</td><td>40%</td></tr>
+        <tr><td>Option Pool (unissued)</td><td>Common</td><td>1,000,000</td><td>10%</td></tr>
+        <tr><td>Seed Investor</td><td>Preferred Series Seed</td><td>1,000,000</td><td>10%</td></tr>
+        <tr><td><strong>Total</strong></td><td></td><td><strong>10,000,000</strong></td><td><strong>100%</strong></td></tr>
+      </tbody>
+    </table>
+    <p>This is a clean, early-stage table. It doesn't stay this way. What complicates it — fast — is the option pool shuffle, convertible notes, and pro-rata rights.</p>
+
+    <h2>The option pool shuffle</h2>
+    <p>Before a VC invests, they'll ask you to create or expand an option pool. This sounds reasonable — you need to hire people, options are how you do it. But the timing matters enormously. If the option pool is created <strong>before</strong> the funding round closes, it dilutes the existing shareholders (i.e., you) before new money comes in. The VC's ownership is calculated on the post-option-pool, pre-money valuation. They've effectively made their shares cheaper using your equity.</p>
+    <blockquote><p>The option pool shuffle can cost founders 5–10% before a single employee is hired.</p></blockquote>
+    <p>Counter it by negotiating the size of the pool down, or by asking for it to be carved out post-money. Most founders don't know to ask. Now you do.</p>
+
+    <h2>Convertible notes and SAFEs</h2>
+    <p>Notes and SAFEs don't show up on your cap table immediately — they convert at a future round. But they carry discounts and valuation caps that determine how much of your company they'll consume when they do. Model the conversion before you sign. Always.</p>
+
+    <h2>What to watch for every round</h2>
+    <ul>
+      <li><strong>Fully diluted ownership:</strong> your percentage after all options, warrants, and convertibles are counted — not just issued shares</li>
+      <li><strong>Liquidation preference:</strong> who gets paid first in an exit, and how much</li>
+      <li><strong>Anti-dilution provisions:</strong> ratchets that protect investors if a future round prices lower than theirs</li>
+      <li><strong>Pro-rata rights:</strong> investor rights to maintain their percentage in future rounds (which can crowd out new investors)</li>
+    </ul>
+    <p>A cap table that looks fine today can contain terms that transfer enormous value away from founders in a modest exit. Model your waterfall — what you'd actually receive at $20M, $50M, $100M exits — before every round closes. It's the only way to know what you're agreeing to.</p>
+    <p>Reading a cap table won't make you feel better about dilution. But it will make sure you're never surprised by it.</p>
+  </div>
+</div>
+<footer>
+  <div class="footer-brand">Founder<span>Mayhem</span></div>
+  <span>© 2026 Founder Mayhem. All rights reserved.</span>
+</footer>
+</body></html>
