@@ -1,0 +1,326 @@
+bash
+
+cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder Mayhem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#0f0f0f;
+    --ink-mid:#3a3a3a;
+    --ink-light:#888;
+    --rule:#d8d4cc;
+    --bg:#faf9f6;
+    --bg-warm:#f2efe8;
+    --accent:#c0392b;
+    --accent2:#1a1a2e;
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'Inter',system-ui,sans-serif;
+  }
+  html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+
+  /* TICKER */
+  .ticker-wrap{background:var(--ink);color:#fff;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:0.04em;overflow:hidden;white-space:nowrap;padding:7px 0;border-bottom:1px solid #333}
+  .ticker-inner{display:inline-block;animation:ticker 28s linear infinite}
+  .ticker-inner span{padding:0 2.5rem;opacity:.85}
+  .ticker-inner span.hot{color:#ff6b6b;opacity:1}
+  @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* NAV */
+  nav{background:var(--bg);border-bottom:1.5px solid var(--ink);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+  .nav-brand{font-family:var(--serif);font-size:22px;font-weight:900;letter-spacing:-0.02em;color:var(--ink)}
+  .nav-brand span{color:var(--accent)}
+  .nav-links{display:flex;gap:2rem;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
+  .nav-links a{color:var(--ink-mid);transition:color .15s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-right{display:flex;align-items:center;gap:1rem}
+  .btn-sub{background:var(--ink);color:#fff;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:none;padding:8px 18px;cursor:pointer;transition:background .15s}
+  .btn-sub:hover{background:var(--accent)}
+
+  /* HERO */
+  .hero{border-bottom:1.5px solid var(--ink);padding:3rem 2rem 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end}
+  .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+  .hero-eyebrow::after{content:'';flex:1;height:1px;background:var(--accent);max-width:40px}
+  .hero-headline{font-family:var(--serif);font-size:clamp(42px,5.5vw,68px);font-weight:900;line-height:1.0;letter-spacing:-0.02em;color:var(--ink)}
+  .hero-headline em{font-style:italic;color:var(--accent)}
+  .hero-sub{margin-top:1.25rem;font-size:16px;color:var(--ink-mid);line-height:1.6;max-width:420px}
+  .hero-cta{margin-top:2rem;display:flex;gap:12px;align-items:center}
+  .hero-cta input{border:1.5px solid var(--ink);background:transparent;font-family:var(--sans);font-size:14px;padding:10px 14px;width:240px;color:var(--ink);outline:none}
+  .hero-cta input::placeholder{color:var(--ink-light)}
+  .hero-cta input:focus{border-color:var(--accent)}
+  .hero-stat-block{display:flex;flex-direction:column;gap:1rem;align-self:end}
+  .hero-stat{border-top:1.5px solid var(--ink);padding-top:1rem}
+  .hero-stat-num{font-family:var(--serif);font-size:clamp(36px,4vw,52px);font-weight:900;line-height:1;color:var(--ink)}
+  .hero-stat-label{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-top:4px}
+  .hero-stat-sub{font-size:13px;color:var(--ink-mid);font-style:italic;margin-top:2px}
+
+  /* SECTION LABEL */
+  .section-label{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-light);padding:0.6rem 2rem;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between}
+  .section-label a{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);text-decoration:none}
+
+  /* ARTICLE GRID */
+  .articles{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1.5px solid var(--ink)}
+  .article-card{padding:1.5rem 1.25rem;border-right:1px solid var(--rule);cursor:pointer}
+  .article-card:last-child{border-right:none}
+  .article-card:hover .article-title{color:var(--accent)}
+  .article-tag{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  .article-title{font-family:var(--serif);font-size:17px;font-weight:700;line-height:1.3;color:var(--ink);transition:color .15s;margin-bottom:8px}
+  .article-meta{font-size:11px;color:var(--ink-light);letter-spacing:0.04em}
+
+  /* FEATURED ROW */
+  .featured{display:grid;grid-template-columns:2fr 1fr;border-bottom:1.5px solid var(--ink)}
+  .featured-main{padding:2rem;border-right:1px solid var(--rule)}
+  .featured-main .article-title{font-size:clamp(22px,3vw,30px);margin-bottom:12px}
+  .featured-main .article-excerpt{font-size:15px;color:var(--ink-mid);line-height:1.65;margin-bottom:1rem}
+  .featured-sidebar{padding:2rem}
+  .sidebar-title{font-family:var(--serif);font-size:15px;font-weight:700;line-height:1.3;margin-bottom:6px;color:var(--ink)}
+  .sidebar-title:hover{color:var(--accent);cursor:pointer}
+  .sidebar-item{padding:0.85rem 0;border-bottom:1px solid var(--rule)}
+  .sidebar-item:last-child{border-bottom:none}
+
+  /* VC TRANSLATOR */
+  .vc-section{background:var(--bg-warm);border-bottom:1.5px solid var(--ink);padding:2rem}
+  .vc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);margin-top:1.5rem;border:1px solid var(--rule)}
+  .vc-card{background:var(--bg);padding:1.25rem}
+  .vc-said{font-size:13px;color:var(--ink-light);margin-bottom:6px;font-style:italic}
+  .vc-meant{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);line-height:1.3}
+  .vc-meant em{color:var(--accent);font-style:normal}
+
+  /* NEWSLETTER BAND */
+  .newsletter-band{background:var(--ink);color:#fff;padding:2.5rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--ink)}
+  .nl-title{font-family:var(--serif);font-size:28px;font-weight:900;line-height:1.1}
+  .nl-sub{font-size:14px;color:#999;margin-top:6px}
+  .nl-form{display:flex;gap:0}
+  .nl-form input{background:transparent;border:1px solid #555;border-right:none;color:#fff;font-size:14px;padding:12px 16px;width:280px;font-family:var(--sans);outline:none}
+  .nl-form input::placeholder{color:#555}
+  .nl-form input:focus{border-color:#fff}
+  .nl-form button{background:#fff;color:var(--ink);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border:1px solid #fff;padding:12px 20px;cursor:pointer;white-space:nowrap;transition:background .15s}
+  .nl-form button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  /* FOOTER */
+  footer{padding:2rem;border-top:1.5px solid var(--ink);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink-light)}
+  .footer-brand{font-family:var(--serif);font-size:16px;font-weight:900;color:var(--ink)}
+  .footer-brand span{color:var(--accent)}
+  .footer-links{display:flex;gap:1.5rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500}
+  .footer-links a:hover{color:var(--ink)}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .hero{grid-template-columns:1fr}
+    .articles{grid-template-columns:1fr 1fr}
+    .article-card:nth-child(2n){border-right:none}
+    .featured{grid-template-columns:1fr}
+    .featured-main{border-right:none;border-bottom:1px solid var(--rule)}
+    .vc-grid{grid-template-columns:1fr}
+    .newsletter-band{flex-direction:column;gap:1.5rem;align-items:flex-start}
+    .nav-links{display:none}
+    footer{flex-direction:column;gap:1rem;text-align:center}
+    .footer-links{flex-wrap:wrap;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="hot">🔴 BREAKING: VC says "we love the space" — founder has 90 days of runway left</span>
+    <span>VALUATION CAP ↑ 12% after deck got a new font</span>
+    <span>TERM SHEET RECEIVED: founder cries in bathroom</span>
+    <span>PIVOT #4 complete — investors "excited about the new direction"</span>
+    <span class="hot">🔴 DILUTION ALERT: Series A closed, founder now owns 14%</span>
+    <span>COLD EMAIL to tier-1 VC: "we're not writing checks right now"</span>
+    <span>RUNWAY EXTENDED: founder stopped paying themselves</span>
+    <span>UPDATE MEETING: 47 slides, 0 decisions made</span>
+    <span class="hot">🔴 BREAKING: VC says "we love the space" — founder has 90 days of runway left</span>
+    <span>VALUATION CAP ↑ 12% after deck got a new font</span>
+    <span>TERM SHEET RECEIVED: founder cries in bathroom</span>
+    <span>PIVOT #4 complete — investors "excited about the new direction"</span>
+    <span class="hot">🔴 DILUTION ALERT: Series A closed, founder now owns 14%</span>
+    <span>COLD EMAIL to tier-1 VC: "we're not writing checks right now"</span>
+    <span>RUNWAY EXTENDED: founder stopped paying themselves</span>
+    <span>UPDATE MEETING: 47 slides, 0 decisions made</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Founder<span>Mayhem</span></div>
+  <div class="nav-links">
+    <a href="#">Stories</a>
+    <a href="#">VC Dictionary</a>
+    <a href="#">Fundraising</a>
+    <a href="#">Merch</a>
+  </div>
+  <div class="nav-right">
+    <button class="btn-sub">Subscribe</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Est. in a coffee shop with 2% runway</div>
+    <h1 class="hero-headline">The VC world,<br>as told by the <em>other side</em> of the table.</h1>
+    <p class="hero-sub">Fundraising intel, startup war stories, and the unfiltered truth about building a company. Read by founders who've heard "not right for us at this stage" one too many times.</p>
+    <div class="hero-cta">
+      <input type="email" placeholder="your@email.com">
+      <button class="btn-sub">Get the Mayhem</button>
+    </div>
+  </div>
+  <div class="hero-stat-block">
+    <div class="hero-stat">
+      <div class="hero-stat-num">84,000+</div>
+      <div class="hero-stat-label">Founders & operators</div>
+      <div class="hero-stat-sub">who know the game is rigged but play anyway</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$0</div>
+      <div class="hero-stat-label">Founder salary (average)</div>
+      <div class="hero-stat-sub">in the month a term sheet closes</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">2.3 yrs</div>
+      <div class="hero-stat-label">Average time to first close</div>
+      <div class="hero-stat-sub">what they don't put in the case studies</div>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST ARTICLES -->
+<div class="section-label">
+  <span>Latest</span>
+  <a href="#">Browse all →</a>
+</div>
+<div class="articles">
+  <div class="article-card">
+    <div class="article-tag">Fundraising</div>
+    <div class="article-title">"We're Aligned on Vision" Is VC for "We Will Ghost You in 30 Days"</div>
+    <div class="article-meta">Jun 8 · 6 min read</div>
+  </div>
+  <div class="article-card">
+    <div class="article-tag">Dilution</div>
+    <div class="article-title">A Founder's Guide to Reading a Cap Table Without Crying</div>
+    <div class="article-meta">Jun 5 · 9 min read</div>
+  </div>
+  <div class="article-card">
+    <div class="article-tag">Due Diligence</div>
+    <div class="article-title">They Asked for the Data Room Three Times. They Never Read It.</div>
+    <div class="article-meta">Jun 1 · 5 min read</div>
+  </div>
+  <div class="article-card">
+    <div class="article-tag">Pitch Mechanics</div>
+    <div class="article-title">The 11-Slide Deck That Got a $4M Check (Annotated)</div>
+    <div class="article-meta">May 28 · 12 min read</div>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<div class="featured">
+  <div class="featured-main">
+    <div class="article-tag">Deep Dive</div>
+    <div class="article-title">The Soft Pass: How VCs Reject You Without Actually Saying No</div>
+    <p class="article-excerpt">Every founder has a collection of them. "Let's stay in touch." "Come back when you have more traction." "We'd love to see the next round." These phrases live in a grey zone between hope and rejection, and VCs deploy them with surgical precision. We decoded the entire vocabulary — with real examples.</p>
+    <a href="#" style="font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);">Read the full breakdown →</a>
+  </div>
+  <div class="featured-sidebar">
+    <div class="section-label" style="padding:0 0 0.6rem;margin-bottom:0.5rem;border-bottom:1px solid var(--rule);">Trending</div>
+    <div class="sidebar-item">
+      <div class="article-tag">SAFEs & Notes</div>
+      <div class="sidebar-title">Why Your SAFE Might Be Worth Less Than You Think</div>
+      <div class="article-meta">May 22 · 7 min</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="article-tag">Cold Outreach</div>
+      <div class="sidebar-title">I Sent 200 Cold Emails to VCs. Here's What Actually Worked.</div>
+      <div class="article-meta">May 18 · 10 min</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="article-tag">Emerging Markets</div>
+      <div class="sidebar-title">Raising From Gulf Investors: The Unwritten Rules Nobody Tells You</div>
+      <div class="article-meta">May 12 · 8 min</div>
+    </div>
+  </div>
+</div>
+
+<!-- VC TRANSLATOR -->
+<div class="vc-section">
+  <div class="section-label" style="padding:0;border-bottom:none;">
+    <span>VC-to-English Translator™</span>
+    <a href="#">Full dictionary →</a>
+  </div>
+  <div class="vc-grid">
+    <div class="vc-card">
+      <div class="vc-said">What they said:</div>
+      <div class="vc-meant">"We love the <em>space</em>."</div>
+      <div style="margin-top:8px;font-size:12px;color:#888;border-top:1px solid #e8e4dc;padding-top:8px;">Translation: We are not investing but want to keep tabs on you in case someone else does.</div>
+    </div>
+    <div class="vc-card">
+      <div class="vc-said">What they said:</div>
+      <div class="vc-meant">"Come back with <em>more traction</em>."</div>
+      <div style="margin-top:8px;font-size:12px;color:#888;border-top:1px solid #e8e4dc;padding-top:8px;">Translation: We have no conviction. Prove us wrong and we'll pretend we were always interested.</div>
+    </div>
+    <div class="vc-card">
+      <div class="vc-said">What they said:</div>
+      <div class="vc-meant">"It's a <em>valuation issue</em>."</div>
+      <div style="margin-top:8px;font-size:12px;color:#888;border-top:1px solid #e8e4dc;padding-top:8px;">Translation: We do not believe in your company enough to argue about price. Lower it and we still won't invest.</div>
+    </div>
+    <div class="vc-card">
+      <div class="vc-said">What they said:</div>
+      <div class="vc-meant">"We're <em>close</em> to getting conviction."</div>
+      <div style="margin-top:8px;font-size:12px;color:#888;border-top:1px solid #e8e4dc;padding-top:8px;">Translation: We are 0% close. This is how we buy time without officially passing.</div>
+    </div>
+    <div class="vc-card">
+      <div class="vc-said">What they said:</div>
+      <div class="vc-meant">"The <em>timing</em> isn't right for us."</div>
+      <div style="margin-top:8px;font-size:12px;color:#888;border-top:1px solid #e8e4dc;padding-top:8px;">Translation: We are at the end of a fund cycle and don't want to admit it. Or: just a no.</div>
+    </div>
+    <div class="vc-card">
+      <div class="vc-said">What they said:</div>
+      <div class="vc-meant">"We'd love to <em>co-invest</em> alongside a lead."</div>
+      <div style="margin-top:8px;font-size:12px;color:#888;border-top:1px solid #e8e4dc;padding-top:8px;">Translation: We want the upside without the work of due diligence. Find someone else to take the risk first.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER BAND -->
+<div class="newsletter-band">
+  <div>
+    <div class="nl-title">The Mayhem Brief</div>
+    <div class="nl-sub">Weekly intel for founders in the trenches. No fluff. No sponsored takes.</div>
+  </div>
+  <div class="nl-form">
+    <input type="email" placeholder="your@startup.com">
+    <button>Subscribe →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Founder<span>Mayhem</span></div>
+  <div class="footer-links">
+    <a href="#">Stories</a>
+    <a href="#">VC Dictionary</a>
+    <a href="#">Fundraising</a>
+    <a href="#">About</a>
+    <a href="#">Merch</a>
+  </div>
+  <div>© 2026 Founder Mayhem. All chaos reserved.</div>
+</footer>
+
+</body>
+</html>
+HTMLEOF
+echo "done"
+Output
+
+done
+Done
